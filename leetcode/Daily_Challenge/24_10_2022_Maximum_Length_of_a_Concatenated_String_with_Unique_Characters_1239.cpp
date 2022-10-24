@@ -34,6 +34,8 @@ public:
     
     
     int maxLength(vector<string>& arr) {
+        // this is a recursive solution low no. of words and low length allows for such solution to be feasible 
+        // time complexity(2^(num of words))
         f("", arr, 0); 
         return ans ;
     }
