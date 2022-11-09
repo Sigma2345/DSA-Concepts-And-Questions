@@ -29,7 +29,7 @@ public:
         root = new TrieNode('\0');
     }
 
-    void insertUtil(TrieNode *root, string word)
+    void insertUtil(TrieNode *root, string word)    
     {
         // base case
         if (word.length() == 0)
