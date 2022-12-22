@@ -1,30 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void findParent(vector<int> &parent, vector<int> &arr, int src){
-	parent[arr[src]]++ ; 
-	if(arr[src] == src) return ;
-	findParent(parent ,arr, arr[src]) ;
+int f(vector<list<int>> &h, vector<int> &parent, int src){
+    int ans = 0; 
+    for(auto x: h[src]){
+        ans += f(h, parent, x) + 1; 
+    }
+    // storing in parents src
+    // no repetition since data structure is tree
+    return parent[src] = ans; 
 }
 
-int main(){
+    int main()
+{
 
-    int n;
-    cin >> n;
+    int n ;
+    cin >>n  ; 
 
-    vector<int> arr(n+1,0);
-    vector<int> parent(n+1,0); 
-    arr[1] = 1 ; 
-    for (int i = 1; i < n; i++){
-        cin >> arr[i+1]; 
+    vector< list<int> > h(n+1);
+
+    for (int i = 0; i < n - 1; i++){
+        int x; 
+        cin>>x ;
+        h[x].push_back(i + 2); 
     }
-    for(int i = 2 ; i<n ; i++)
-    	findParent(parent, arr, i);
 
-    for(int i = 1; i<=n ; i++){
-    	cout<<parent[i]<<' ' ; 
+    vector<int> parent(n + 1, -1);
+    int x = f(h, parent, 1);
+
+    for (int i = 1; i <= n; i++){
+        cout << parent[i] << ' '; 
     }
-    cout<<endl ;
 
-    return 0; 
+    cout << endl; 
+
+    return 0;
 }
